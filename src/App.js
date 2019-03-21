@@ -82,9 +82,14 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="app-container">
 				<h2>Welcome to your Todo App!</h2>
-				<TodoList array={this.state.todoListData} toggleItem={this.toggleItem} />
+				<div className="list-container">
+					<TodoList array={this.state.todoListData} toggleItem={this.toggleItem} />
+					<button className="clear-btn" onClick={this.clearCompleted}>
+						Erase Completed
+					</button>
+				</div>
 
 				<TodoForm
 					// task={this.state.task}
@@ -92,7 +97,6 @@ class App extends React.Component {
 					updateList={this.updateList}
 					clearCompleted={this.clearCompleted}
 				/>
-				<button onClick={this.clearCompleted}>Clear Completed</button>
 			</div>
 		);
 	}

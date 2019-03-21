@@ -7,6 +7,10 @@ import Todo from './Todo';
 const TodoList = (props) => {
 	return (
 		<div className="array-container">
+			<h3 className="instr">Todo List:</h3>
+			<p className="instr">
+				click a task to mark it <em>complete!</em>
+			</p>
 			{props.array.map((arrayItem) => <Todo key={arrayItem.id} item={arrayItem} toggleItem={props.toggleItem} />)}
 		</div>
 	);

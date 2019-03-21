@@ -7,7 +7,7 @@ const Todo = (props) => {
 				className={`item${props.item.completed ? ' completed' : ''}`}
 				onClick={() => props.toggleItem(props.item.id)}
 			>
-				<li>{props.item.task}</li>
+				<li className="task">{props.item.task}</li>
 			</ul>
 		</div>
 	);
