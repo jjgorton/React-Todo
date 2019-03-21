@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
+import TodoForm from './components/TodoComponents/TodoForm';
 
 const todoArray = [
 	{
@@ -21,29 +22,32 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			todoListData : todoArray,
-			task         : '',
-			id           : Date.now(),
-			completed    : false
+			todoListData : todoArray
 		};
 	}
 
-	handleChanges = (event) => {
-		this.setState({
-			[event.target.task]: event.target.value
-		});
-	};
+	// handleChanges = (event) => {
+	// 	console.log('tying');
+	// 	this.setState({
+	// 		[event.target.task]: event.target.value
+	// 	});
+	// };
 
-	updateList = (event) => {
+	updateList = (event, newTask) => {
+		console.log('test');
 		event.preventDefault();
-		const newTask = {
-			task      : this.state.task,
-			id        : this.state.id,
-			completed : this.state.completed
-		};
+
+		const newTasks = [
+			...this.state.todoListData,
+			{
+				task      : newTask,
+				id        : Date.now(),
+				completed : false
+			}
+		];
 
 		this.setState({
-			todoListData : [ ...this.state.todoListData, newTask ]
+			todoListData : newTasks
 		});
 	};
 
@@ -51,7 +55,9 @@ class App extends React.Component {
 		return (
 			<div>
 				<h2>Welcome to your Todo App!</h2>
-				<TodoList array={this.state.todoListData} task={this.state.task} handleChanges={this.handleChanges} />
+				<TodoList array={this.state.todoListData} />
+
+				<TodoForm task={this.state.task} handleChanges={this.handleChanges} updateList={this.updateList} />
 			</div>
 		);
 	}

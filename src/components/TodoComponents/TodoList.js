@@ -3,7 +3,7 @@
 
 import React from 'react';
 import Todo from './Todo';
-import TodoForm from './TodoForm';
+// import TodoForm from './TodoForm';
 
 const TodoList = (props) => {
 	return (
@@ -11,8 +11,6 @@ const TodoList = (props) => {
 			<div className="array-container">
 				{props.array.map((arrayItem, index) => <Todo key={index} item={arrayItem} />)}
 			</div>
-
-			<TodoForm task={props.task} handleChanges={props.handleChanges} />
 		</div>
 	);
 };
