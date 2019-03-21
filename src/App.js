@@ -22,32 +22,30 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			todoListData : todoArray,
-			task         : '',
-			id           : Date.now(),
-			completed    : false
+			todoListData : todoArray
 		};
 	}
 
-	handleChanges = (event) => {
-		this.setState({
-			[event.target.name]: event.target.value
-		});
-		console.log(event.target.value);
-	};
+	// handleChanges = (event) => {
+	// 	this.setState({
+	// 		[event.target.name]: event.target.value
+	// 	});
+	// 	console.log(event.target.value);
+	// };
 
 	updateList = (event) => {
-		event.preventDefault();
-		const newTask = {
-			task      : this.state.task,
-			id        : this.state.id,
-			completed : this.state.completed
-		};
-		// console.log(newTask.task);
+		// event.preventDefault();
 
-		this.setState({
-			todoListData : [ ...this.state.todoListData, newTask ]
-		});
+		const copy = this.state.todoListData.slice();
+		const newTask = {
+			task      : event,
+			id        : Date.now(),
+			completed : false
+		};
+
+		copy.push(newTask);
+
+		this.setState({ todoListData: copy });
 	};
 
 	toggleItem = (id) => {
@@ -71,13 +69,30 @@ class App extends React.Component {
 		// return updated list to state.
 	};
 
+	clearCompleted = (event) => {
+		// use filter
+		// looping over all the items inside of `this.state.groceries`
+		// filter out any items, who's item.purchased === true
+		// set your state with your new filtered list.
+		event.preventDefault();
+		const filteredList = this.state.todoListData.filter((item) => item.completed !== true);
+
+		this.setState({ todoListData: filteredList });
+	};
+
 	render() {
 		return (
 			<div>
 				<h2>Welcome to your Todo App!</h2>
 				<TodoList array={this.state.todoListData} toggleItem={this.toggleItem} />
 
-				<TodoForm task={this.state.task} handleChanges={this.handleChanges} updateList={this.updateList} />
+				<TodoForm
+					// task={this.state.task}
+					// handleChanges={this.handleChanges}
+					updateList={this.updateList}
+					clearCompleted={this.clearCompleted}
+				/>
+				<button onClick={this.clearCompleted}>Clear Completed</button>
 			</div>
 		);
 	}
