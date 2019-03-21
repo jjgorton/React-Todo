@@ -50,11 +50,32 @@ class App extends React.Component {
 		});
 	};
 
+	toggleItem = (id) => {
+		this.setState({
+			todoListData : this.state.todoListData.map((item) => {
+				if (item.id === id) {
+					return {
+						...item,
+						// task: item.task,
+						// id: item.id,
+						// completed: item.completed
+						completed : !item.completed
+					};
+				}
+				return item;
+			})
+		});
+		// loop over groceries
+		// find grocery by given id
+		// change flag to true
+		// return updated list to state.
+	};
+
 	render() {
 		return (
 			<div>
 				<h2>Welcome to your Todo App!</h2>
-				<TodoList array={this.state.todoListData} />
+				<TodoList array={this.state.todoListData} toggleItem={this.toggleItem} />
 
 				<TodoForm task={this.state.task} handleChanges={this.handleChanges} updateList={this.updateList} />
 			</div>
