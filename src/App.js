@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
+import TodoForm from './components/TodoComponents/TodoForm';
 
 const todoArray = [
 	{
@@ -30,8 +31,9 @@ class App extends React.Component {
 
 	handleChanges = (event) => {
 		this.setState({
-			[event.target.task]: event.target.value
+			[event.target.name]: event.target.value
 		});
+		console.log(event.target.value);
 	};
 
 	updateList = (event) => {
@@ -41,6 +43,7 @@ class App extends React.Component {
 			id        : this.state.id,
 			completed : this.state.completed
 		};
+		// console.log(newTask.task);
 
 		this.setState({
 			todoListData : [ ...this.state.todoListData, newTask ]
@@ -51,7 +54,9 @@ class App extends React.Component {
 		return (
 			<div>
 				<h2>Welcome to your Todo App!</h2>
-				<TodoList array={this.state.todoListData} task={this.state.task} handleChanges={this.handleChanges} />
+				<TodoList array={this.state.todoListData} />
+
+				<TodoForm task={this.state.task} handleChanges={this.handleChanges} updateList={this.updateList} />
 			</div>
 		);
 	}

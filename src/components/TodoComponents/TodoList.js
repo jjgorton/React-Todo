@@ -3,16 +3,11 @@
 
 import React from 'react';
 import Todo from './Todo';
-import TodoForm from './TodoForm';
 
 const TodoList = (props) => {
 	return (
-		<div className="wrapper">
-			<div className="array-container">
-				{props.array.map((arrayItem, index) => <Todo key={index} item={arrayItem} />)}
-			</div>
-
-			<TodoForm task={props.task} handleChanges={props.handleChanges} />
+		<div className="array-container">
+			{props.array.map((arrayItem, index) => <Todo key={index} item={arrayItem} />)}
 		</div>
 	);
 };
